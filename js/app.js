@@ -4,14 +4,14 @@ let produtosNoCarrinho = document.getElementById('lista-produtos');
 // Referência ao elemento que exibirá o valor total do carrinho
 let valorTotal = document.getElementById('valor-total');
 
-// Inicializa o total do carrinho como 0
-let total = 0;
+// Inicializa o total do carrinho como 1400
+let total = 1400;
 
 function adicionar() {
     // Obtém o valor selecionado do produto e a quantidade inserida
     let produtoSelecionado = document.getElementById('produto').value;
     let quantidadeProduto = parseInt(document.getElementById('quantidade').value);
-    
+
     // Declara variáveis para armazenar o nome do produto e seu valor
     let nomeProduto, valorProduto;
 
@@ -26,6 +26,9 @@ function adicionar() {
         nomeProduto = 'Oculus VR';
         valorProduto = 5000;
     }
+
+    // Adiciona o valor 0 ao campo quantidade após adicionar um produto ao carrinho
+    document.getElementById('quantidade').value = 0;
 
     // Calcula o valor total dos produtos selecionados (quantidade x preço unitário)
     let valorTotalProdutos = quantidadeProduto * valorProduto;
@@ -55,12 +58,16 @@ function adicionar() {
     sectionProdutosNoCarrinho.appendChild(textoNomeProduto);
     sectionProdutosNoCarrinho.appendChild(spanValor);
 
-    // Adiciona a <section> criada ao elemento do carrinho para exibição
-    produtosNoCarrinho.appendChild(sectionProdutosNoCarrinho);
+    // Se a quantidade de produto for 0, nenhum produto é adicionado ao carrinho
+    if (quantidadeProduto == 0) {
+        return;
+    } else {
+        // Adiciona a <section> criada ao elemento do carrinho para exibição
+        produtosNoCarrinho.appendChild(sectionProdutosNoCarrinho);
+    }
 
     // Atualiza o texto do valor total do carrinho na interface
     valorTotal.textContent = `R$${total}`;
-    return quantidadeProduto;
 }
 
 function limpar() {
