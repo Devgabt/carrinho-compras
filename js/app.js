@@ -30,6 +30,12 @@ function adicionar() {
     // Adiciona o valor 0 ao campo quantidade após adicionar um produto ao carrinho
     document.getElementById('quantidade').value = 0;
 
+    // Valida se a quantidade inserida é um número válido.
+    if(isNaN(quantidadeProduto) || quantidadeProduto < 0){
+        alert(`${quantidadeProduto.toString()} não é uma quantidade válida.`);
+        return;
+    }
+
     // Calcula o valor total dos produtos selecionados (quantidade x preço unitário)
     let valorTotalProdutos = quantidadeProduto * valorProduto;
 
